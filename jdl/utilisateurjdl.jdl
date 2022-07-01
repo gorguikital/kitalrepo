@@ -1,0 +1,40 @@
+
+enum Sexe{
+	MASCULIN, FEMININ
+}
+entity Utilisateur(utilisateurs){
+	nom String required unique minlength(3) maxlength(10),
+    prenom String required minlength(4) maxlength(50),
+    sexe Sexe required,
+    telephone String required minlength(7) maxlength(9),
+    adresse String required,
+    cin String unique minlength(10) maxlength(14),
+    email String required minlength(5) maxlength(50),
+    password String required
+}
+
+entity Profile(profiles) {
+	libelle String required minlength(3) maxlength(10),
+    description String
+}
+entity Service(services){
+	code String required minlength(3) maxlength(8),
+    libelle String required minlength(3) maxlength(50),
+    descrition String 
+}
+
+relationship ManyToOne {
+    Utilisateur{service} to Service
+}
+
+relationship ManyToMany {
+	Utilisateur{profile required} to Profile{utilisateur}
+}
+
+paginate all with pagination
+
+service all with serviceImpl
+
+dto all with mapstruct
+
+filter all 
