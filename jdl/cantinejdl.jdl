@@ -1,0 +1,23 @@
+
+entity GroupeCantine(groupecantines){
+	nom String required unique minlength(3) maxlength(10),
+    nombreEleves Integer required,
+    etat Boolean
+}
+
+entity Cantine(cantines) {
+	libelle String required minlength(3) maxlength(10),
+    nombreGroupe Integer required
+}
+
+relationship ManyToOne {
+    GroupeCantine{cantine} to Cantine
+}
+
+paginate all with pagination
+
+service all with serviceImpl
+
+dto all with mapstruct
+
+filter all 

@@ -1,0 +1,34 @@
+
+entity GroupeTransport(groupetransport){
+	nom String required unique minlength(3) maxlength(10),
+    nombreEleves Integer required,
+    etat Boolean
+}
+
+entity Chauffeur(chauffeurs) {
+	nom String required minlength(3) maxlength(10),
+    prenom String required minlength(3) maxlength(50),
+    dateNaiss Instant required,
+    lieuNaiss String required,
+    adresse String,
+    telephone String required unique minlength(4) maxlength(9)
+}
+
+entity Bus(bus){
+	matricule String required unique,
+    numero String required,
+    nombreplace Integer required
+}
+
+relationship ManyToOne {
+    Bus{Chauffeur} to Chauffeur,
+    GroupeTransport{bus} to Bus
+}
+
+paginate all with pagination
+
+service all with serviceImpl
+
+dto all with mapstruct
+
+filter all 

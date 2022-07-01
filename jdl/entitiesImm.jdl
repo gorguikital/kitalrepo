@@ -1,0 +1,22 @@
+
+entity Batiment(batiments) {
+	nom String required unique minlength(3) maxlength(10)
+    nombreSalle Integer required
+}
+
+entity Salle(salles){
+	nom String required unique,
+    nombre Integer required
+}
+
+relationship ManyToOne {
+	Salle{batiment} to Batiment
+}
+
+paginate all with pagination
+
+service all with serviceImpl
+
+dto all with mapstruct
+
+filter all 

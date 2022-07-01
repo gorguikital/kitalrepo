@@ -1,0 +1,209 @@
+
+//meet : https://meet.google.com/hpm-msbu-hge?authuser=0&pli=1
+//jdl => langage jhipster
+
+
+enum Status {
+   BROUILLON, SOUMIS, ATTRIBUE, CONFIRMATION, REJETE, TERMINE, RETOUR
+}
+
+enum StatusPaiement {
+    PAYE, RELIQUAT, NON_PAYE
+}
+
+enum Priorite {
+    FAIBLE, NORMALE, ELEVEE, URGENT
+}
+
+enum TypeBu {
+    EDENS, OASIS, E_SERVICE, ESPACE_AUTO, POINT_CHAUD
+}
+
+
+#end enums
+
+
+# entities
+# filter : see https://www.jhipster.tech/entities-filtering/
+# annotation : https://www.jhipster.tech/jdl/options
+# field : https://www.jhipster.tech/jdl/entities-fields
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Site(sites) {
+    nom String required unique minlength(2) maxlength(50),
+    phone String required unique  minlength(6) maxlength(30),
+    email String required unique minlength(5) maxlength(50),
+    adresse String  maxlength(255)
+}
+
+
+@filter 
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Bu(bus) {
+    nom String required unique minlength(2) maxlength(50),
+    code String required unique minlength(2) maxlength(10),
+	type TypeBu required,
+    phone String required unique  minlength(6) maxlength(30),
+    email String required unique minlength(5) maxlength(50)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Categorie(categories) {
+    nom String required unique minlength(2) maxlength(50),
+    description String  minlength(0) maxlength(255)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Type(types) {
+    nom String required unique minlength(2) maxlength(50),
+    description String  minlength(0) maxlength(255)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Intervenant(intervenants) {
+    nom String required minlength(2) maxlength(50),
+    prenom String required minlength(2) maxlength(50),
+    phone String unique minlength(6) maxlength(30),
+    email String unique minlength(5) maxlength(50)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Responsable(responsables) {
+    nom String required minlength(2) maxlength(50),
+    prenom String required minlength(2) maxlength(50),
+    phone String unique  minlength(6) maxlength(30),
+    email String unique minlength(5) maxlength(50)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity PieceJointe(pieces_jointes) {
+    nom String required minlength(2) maxlength(50),
+    data AnyBlob
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Prestataire(prestataires) {
+    nom String required minlength(2) maxlength(50),
+    adresse String  maxlength(255),
+    phone String unique  minlength(6) maxlength(30),
+    email String unique minlength(5) maxlength(50)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Responsabilite(responsabilites) {
+    montant Double min(0),
+    commentaire String  minlength(0) maxlength(255)
+}
+
+
+@filter
+@service(serviceImpl)
+@dto(mapstruct)
+@paginate(pagination)
+entity Tache(taches) {
+     titre String required  minlength(3) maxlength(100),
+     description String  minlength(0) maxlength(255),
+     echeance Instant,
+     progession Integer min(0) max(100),
+     statusPaiement StatusPaiement required,
+     status Status required,
+     priorite Priorite required
+}
+
+
+relationship ManyToOne { // this version support only unidirectional
+    Tache{categorie} to Categorie, 
+    Tache{type} to Type,
+    Tache{bu} to Bu,
+    Bu{site} to Site,
+
+}
+
+
+relationship OneToMany {
+     Responsable{taches} to Tache{responsable},
+     Tache{pieceJointes} to PieceJointe{tache},
+     Tache{responsabilites} to Responsabilite{tache},
+     Prestataire {responsabilites} to Responsabilite {prestataire}
+}
+
+
+relationship ManyToMany {
+	Tache{intervenants} to Intervenant{taches}
+}
+
+
+
+//ALTERNATIVE OF ANNOTATIONS
+    // paginate all with pagination
+    // service all with serviceImpl 
+    // dto all with mapstruc
+    // search all with elasticsearch
+    // filter all
+
+
+
+// IMPORT JDL(or JH) file
+    // jhipster import-jdl file_full_path.jh
+
+
+
+//CREATE ENTITIES AT GATEGAY SIDE
+    //jhipster entity Site
+    //jhipster entity Categorie
+    //jhipster entity type
+    //jhipster entity Bu
+    //jhipster entity  esponsable
+
+
+//add keycloak as alias of localhost
+    // C:\Windows\System32\drivers\etc\hosts
+
+
+
+//export jdl file  from existing jhipster prokject : 
+    //jhipster export-jdl output_file
+
+
+
+// start keycloak : docker-compose -f keycloak.yml up ( visite http://localhost:9080)
+// start eureka : docker-compose -f jhipster-registry.yml up (visite http://localhost:8761)
+// start ms :  .\mvnw or mvn
+// start gateway : .\mvnw or mvn
+// start dev mode : npm start
+
+
+// themes : https://bootswatch.com/
