@@ -6,18 +6,17 @@ enum Sexe{
 	MASCULIN, FEMININ
 }
 
-entity Inscription(inscription) {
+entity Inscription(inscriptions) {
 	dateInscription String required,
     status Status required
+    idClasse String
 }
 
-entity Annee(annee){
+entity Annee(annees){
 	nom String required unique
 }
 
-// an ignored comment
-/** not an ignored comment */
-entity Tuteur(tuteur) {
+entity Tuteur(tuteurs) {
 	nom String required minlength(4) maxlength(20),
 	prenom String required minlength(5) maxlength(50),
 	adresse String required minlength(6) maxlength(50),
@@ -29,12 +28,14 @@ entity Eleve(eleves) {
 	matricule String required,
     nom String required minlength(3) maxlength(25),
     prenom String required minlength(3) maxlength(50),
-    sexe String required minlength(1) maxlength(8),
+    sexe Sexe required,
     adresse String required maxlength(255),
     telephone String required maxlength(9),
     email String required unique minlength(5) maxlength(50),
     dateNaissance String required minlength(5) maxlength(30),
-    lieuNaissance String required minlength(5) maxlength(50)
+    lieuNaissance String required minlength(5) maxlength(50),
+    idTransport String,
+    idCantine String
     
 }
 
