@@ -1,8 +1,7 @@
 
 entity GroupeCantine(groupecantines){
 	nom String required unique minlength(3) maxlength(10),
-    nombreEleves Integer required,
-    etat Boolean
+    nombreEleves Integer required
 }
 
 entity Cantine(cantines) {
@@ -10,10 +9,9 @@ entity Cantine(cantines) {
     nombreGroupe Integer required
 }
 
-relationship ManyToOne {
-    GroupeCantine{cantine} to Cantine
+relationship OneToMany {
+     Cantine{groupecantines} to GroupeCantine{cantine}
 }
-
 paginate all with pagination
 
 service all with serviceImpl

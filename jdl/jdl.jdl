@@ -7,7 +7,7 @@ enum Sexe{
 }
 
 entity Inscription(inscriptions) {
-	dateInscription String required,
+	dateInscription Instant required,
     status Status required
     idClasse String
 }
@@ -32,7 +32,7 @@ entity Eleve(eleves) {
     adresse String required maxlength(255),
     telephone String required maxlength(9),
     email String required unique minlength(5) maxlength(50),
-    dateNaissance String required minlength(5) maxlength(30),
+    dateNaissance Instant required,
     lieuNaissance String required minlength(5) maxlength(50),
     idTransport String,
     idCantine String

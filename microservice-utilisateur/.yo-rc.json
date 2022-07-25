@@ -1,0 +1,38 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.ucad.memoire.kital"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "microservice",
+    "baseName": "utilisateurdb",
+    "packageName": "com.ucad.memoire.kital",
+    "packageFolder": "com/ucad/memoire/kital",
+    "serverPort": "8099",
+    "authenticationType": "oauth2",
+    "cacheProvider": "hazelcast",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "NDYyNjM2YmFjYzdlODgzODhjM2Y3OWFjMDllZGNkZmJhYTY2YTJlYzdhZDIwMjg2N2ZhMDNiMTliZWRkMzY1YzY1Yzk3N2M1ZGI3MDY2ZDA3NzkwODJhNGMxNmM3ODMzM2Q4NjBjZmJkZWZmNDgyZGY0ZmEzMDhkNTc4ZDRiMGI=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1657733239691,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}
